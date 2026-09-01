@@ -1,22 +1,21 @@
 from langchain_ollama import ChatOllama
-from langchain_core.messages import (
-    SystemMessage,
-    HumanMessage
-)
+from langchain_core.prompts import ChatPromptTemplate
 
 model = ChatOllama(
     model = "gemma3:4b"
 )
 
-messages = [
-    SystemMessage(
-        content="You are an AI engineering Teacher."
+prompts = ChatPromptTemplate.from_messages([
+    ("system",
+     "You are an AI Engineering Assistant."
     ),
-    HumanMessage(
-        content="What is Langchain?"
+    ("human",
+     "{question}"
     )
-]
+])
 
-response = model.invoke(messages)
+formatted_prompt = prompts.invoke({
+    "question": "What is RAG?"
+})
 
-print(response.content)
+print(formatted_prompt)
