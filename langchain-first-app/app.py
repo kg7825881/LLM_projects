@@ -14,8 +14,10 @@ prompts = ChatPromptTemplate.from_messages([
     )
 ])
 
-formatted_prompt = prompts.invoke({
+chain = prompts | model
+
+response = chain.invoke({
     "question": "What is RAG?"
 })
 
-print(formatted_prompt)
+print(response.content)
