@@ -87,14 +87,13 @@ if question:
             )
 
     #Run Chain
-    response = chain.invoke({
-        "chat_history": chat_history,
-        "question": question
-    })
-
-    #Display assistant response
     with st.chat_message("assistant"):
-        st.markdown(response)
+        stream = chain.stream({
+                "chat_history": chat_history,
+                "question": question
+            })
+        
+        response = st.write_stream(stream)
 
     #Store assistant response 
     st.session_state.messages.append({
