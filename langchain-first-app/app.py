@@ -32,7 +32,7 @@ prompts = ChatPromptTemplate.from_messages([
         Use architectural diagrams, code snippets and examples when useful.
         """
     ),
-    MessagePlaceholder(
+    MessagesPlaceholder(
         variable_name = "chat_history"
     ),
     (
