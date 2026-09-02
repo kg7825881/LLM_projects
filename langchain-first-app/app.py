@@ -17,7 +17,7 @@ model = ChatOllama(
     model = "gemma3:4b",
     temperature = 0.3,
     top_p = 0.9,
-    tok_k = 40,
+    top_k = 40,
     num_ctx = 8192
 )
 
