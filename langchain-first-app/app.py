@@ -7,10 +7,10 @@ from langchain_core.output_parsers import StrOutputParser
 
 # Configure Streamlit
 st.set_page_config(
-    page_title="LangChain AI Assistant",
+    page_title="AI Engineer Assistant",
     page_icon="🤖"
 )
-st.title("🤖 LangChain AI Assistant")
+st.title("🤖 AI Engineer Assistant")
 
 #Intialize the Model
 model = ChatOllama(
