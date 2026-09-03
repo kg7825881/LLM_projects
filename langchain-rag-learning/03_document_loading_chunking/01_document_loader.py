@@ -1,19 +1,55 @@
-from langchain_community.document_loaders import PyPDFLoader
+from pathlib import Path
+from langchain_core.documents import Document
 
-# Load a PDF document using PyPDFLoader
-loader = PyPDFLoader(
-    "langchain-rag-learning\\03_document_loading_chunking\\documents\\Cardiac Arrest.pdf"
+MARKDOWN_PATH = Path("03_document_loading_chunking/outputs/Cardiac_Arrest.md") 
+
+#Read Extraction Markdown
+markdown_text = MARKDOWN_PATH.read_text(
+    encoding="utf-8"
 )
 
-documents = loader.load()
+#Create LangChain Document
 
-# Inspect result
-print("Total Documents:", len(documents))
+document = Document(
+    page_content=markdown_text,
+    metadata={
+        "source": "Cardiac Arrest.pdf",
+        "extraction_method": "pymupdf4llm",
+        "format": "markdown",
+        "domain": "healthcare",
+        "topic": "cardiac_arrest"
+    }
+)
 
-print("\n--- FIRST DOCUMENT ---")
-print(documents[0].page_content)
+# 3. INSPECT
+
+print(
+    "Object type:",
+    type(document)
+)
 
 
+print(
+    "\nTotal characters:",
+    len(document.page_content)
+)
 
-print("\n--- METADATA ---")
-print(documents[0].metadata)
+
+print(
+    "\nMetadata:"
+)
+
+print(
+    document.metadata
+)
+
+
+print(
+    "\nContent preview:\n"
+)
+
+print(
+    document.page_content[:3000]
+)
+
+
