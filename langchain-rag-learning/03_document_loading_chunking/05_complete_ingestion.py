@@ -1,10 +1,13 @@
-from langchain_community.document_loaders import PyPDFLoader
+from pathlib import Path
+
+from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 # ==========================================
 # Configuration
 # ==========================================
+MARKDOWN_PATH = Path("03_document_loading_chunking/outputs/Cardiac_Arrest.md") 
 
 CHUNK_SIZE = 1000
 
@@ -12,32 +15,38 @@ CHUNK_OVERLAP = 200
 
 
 # ==========================================
-# 1. Load document
+# 1. Load the Markdown
 # ==========================================
 
-loader = PyPDFLoader(
-    "langchain-rag-learning\\03_document_loading_chunking\\documents\\Cardiac Arrest.pdf"
+markdown_text = MARKDOWN_PATH.read_text(
+    encoding="utf-8"
 )
 
-documents = loader.load()
-
-
-print(
-    f"Loaded {len(documents)} documents"
-)
-
-
-# 2. Enrich metadata
-
-for document in documents:
-
-    document.metadata.update({
+document = Document(
+    page_content=markdown_text,
+    metadata={
+        "source": "Cardiac Arrest.pdf",
+        "extraction_method": "pymupdf4llm",
+        "format": "markdown",
         "domain": "healthcare",
         "document_type": "research_paper",
         "topic": "cardiac_arrest_prediction"
-    })
+    }
+)
 
-# 3. Create splitter
+documents = [document]
+
+
+print(
+    f"Loaded {len(documents)} LangChain document"
+)
+
+
+print(
+    f"Total characters: {len(document.page_content)}"
+)
+
+# 2. Create splitter
 
 splitter = RecursiveCharacterTextSplitter(
 
@@ -49,7 +58,7 @@ splitter = RecursiveCharacterTextSplitter(
 )
 
 
-# 4. Split documents
+# 3. Split documents
 
 chunks = splitter.split_documents(
     documents
@@ -60,14 +69,14 @@ print(
     f"Created {len(chunks)} chunks"
 )
 
-# 5. Add chunk identifiers
+# 4. Add chunk identifiers
 
 for index, chunk in enumerate(chunks):
 
     chunk.metadata["chunk_id"] = index
 
 
-# 6. Inspect result
+# 5. Inspect result
 
 for index, chunk in enumerate(chunks[:5]):
 
