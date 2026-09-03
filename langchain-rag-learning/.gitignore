@@ -1,12 +1,23 @@
-# Python virtual environments
-.venv/
+# Virtual environment
 venv/
-env/
-ENV/
+.venv/
 
-# Python cache
+# Python
 __pycache__/
-*.py[cod]
+*.pyc
 
-# VS Code settings
+# Environment variables
+.env
+
+# VS Code
 .vscode/
+
+# macOS
+.DS_Store
+
+# Vector databases later
+chroma_db/
+vector_store/
+
+# Temporary files
+*.log
