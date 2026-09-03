@@ -1,17 +1,19 @@
-from langchain_core.documents import Document
+from langchain_community.document_loaders import PyPDFLoader
 
-doc = Document(
-    page_content="""
-    New Jersey property damage claims may have
-    a limitation period depending on the applicable statute.
-    """,
-    metadata={
-        "source": "legal_rules.pdf",
-        "jurisdiction": "New Jersey"
-    }
+# Load a PDF document using PyPDFLoader
+loader = PyPDFLoader(
+    "langchain-rag-learning\\03_document_loading_chunking\\documents\\Cardiac Arrest.pdf"
 )
 
-print(doc)
-print(doc.page_content)
-print(doc.metadata)
-print(doc.metadata["jurisdiction"])
+documents = loader.load()
+
+# Inspect result
+print("Total Documents:", len(documents))
+
+print("\n--- FIRST DOCUMENT ---")
+print(documents[0].page_content)
+
+
+
+print("\n--- METADATA ---")
+print(documents[0].metadata)
