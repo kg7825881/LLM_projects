@@ -45,7 +45,7 @@ vector = embeddings.embed_documents(
     ]
 )
 
-print("Chunks embedded:", len(vector))
+print("Chunk Embedded:", len(vector))
 
 print(
     "Vector dimension:",
