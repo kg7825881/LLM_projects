@@ -6,3 +6,5 @@ langchain-text-splitters
 streamlit
 pypdf
 pymupdf4llm
+langchain-chroma
+chromadb
