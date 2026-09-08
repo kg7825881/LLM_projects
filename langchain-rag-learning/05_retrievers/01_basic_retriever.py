@@ -58,4 +58,8 @@ for index, document in enumerate(documents):
         document.page_content
     )
 
+    print("\nMETADATA:")
     
+    print(
+        document.metadata
+    )
