@@ -52,10 +52,7 @@ def format_document(documents):
     )
 
 prompt = ChatPromptTemplate.from_messages(
-    [
-        (
-            "system",
-            """
+    """
 You are a research assistant.
 
 Answer the question using only the provided context.
@@ -74,8 +71,6 @@ Question:
 
 Answer:
 """
-        )
-    ]
 )
 
 rag_chain = (
@@ -91,7 +86,7 @@ rag_chain = (
 )
 
 answer = rag_chain.invoke(
-    "Which machine learning model performed best?"
+    "Who is the President of the United States?"
 )
 
 print(answer)
