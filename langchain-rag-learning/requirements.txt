@@ -8,3 +8,4 @@ pypdf
 pymupdf4llm
 langchain-chroma
 chromadb
+rank_25
